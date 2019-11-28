@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--mybatis的配置文件，数据层查询的实现配置-->
+<!--要实现接口的类路径-->
+<mapper namespace="com.atguigu.gmall0624.publisher.mapper.DauMapper">
+    <!--接口的方法名-->
+    <select id="getDauTotal" resultType="java.lang.Long">
+        select count(*) ct from gmall2019_dau where logdate=#{date}<!--方法的参数-->
+    </select>
+
+    <select id="getDauHour"  resultMap="dauResultMap">
+         select LOGHOUR, count(*) CT from gmall2019_dau
+         where LOGDATE=#{date}
+         group by LOGHOUR
+    </select>
+    <resultMap id="dauResultMap" type="java.util.Map">
+        <result property="loghour" column="LOGHOUR"></result>
+        <result property="ct" column="CT"></result>
+    </resultMap>
+</mapper>
