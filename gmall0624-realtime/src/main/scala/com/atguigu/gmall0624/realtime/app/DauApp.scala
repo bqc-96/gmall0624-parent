@@ -106,6 +106,7 @@ object DauApp {
     }
     //把数据写入hbase+phoenix
     flatDStream.foreachRDD(rdd=>{
+      println("zaizz")
       rdd.saveToPhoenix("GMALL2019_DAU",Seq("MID","UID","APPID","AREA","OS","CH","TYPE","VS","LOGDATE","LOGHOUR","TS"),
         new Configuration,Some("hadoop102,hadoop103,hadoop104:2181"))
     })

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--mybatis的配置文件，数据层查询的实现配置-->
+<!--要实现接口的类路径-->
+<mapper namespace="com.atguigu.gmall0624.publisher.mapper.OrderMapper">
+    <!--接口的方法名-->
+    <select id="selectOrderAmount" resultType="java.lang.Double">
+        select sum(total_amount) order_amount
+        from gmall2019_order_info
+        where create_date=#{date}<!--方法的参数-->
+    </select>
+
+    <select id="selectOrderAmountHour"  resultMap="dauResultMap">
+            select create_hour,sum(total_amount) order_amount
+            from gmall2019_order_info
+            where create_date=#{date}
+            group by create_hour
+    </select>
+    <resultMap id="dauResultMap" type="java.util.Map">
+        <result property="create_hour" column="CREATE_HOUR"></result>
+        <result property="order_amount" column="ORDER_AMOUNT"></result>
+    </resultMap>
+</mapper>
