@@ -62,17 +62,18 @@ object MyEsUtil {
 
   //插入多条
   def insertBulk(indexName:String,list: List[(String, Any)]): Unit = {
-    val jest: JestClient = getClient
-    val bulkBulider = new Bulk.Builder()
-    for ((id,elem)<- list) {
-      val index: Index = new Index.Builder(elem).index(indexName).`type`("_doc").id(id).build()
-    bulkBulider.addAction(index)
+    if (list != null && list.size > 0) {
+      val jest: JestClient = getClient
+      val bulkBulider = new Bulk.Builder()
+      for ((id, elem) <- list) {
+        val index: Index = new Index.Builder(elem).index(indexName).`type`("_doc").id(id).build()
+        bulkBulider.addAction(index)
+      }
+      val items: util.List[BulkResult#BulkResultItem] = jest.execute(bulkBulider.build()).getItems
+      close(jest)
+      println("保存" + items.size() + "条数据")
     }
-    val items: util.List[BulkResult#BulkResultItem] = jest.execute(bulkBulider.build()).getItems
-    close(jest)
-    println("保存" + items.size() + "条数据")
   }
-
   case class Stu(id: Int, name: String, classId: Int);
 }
 

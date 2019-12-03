@@ -116,8 +116,8 @@ public class JsonMocker {
      `area` string COMMENT '城市' */
 
 
-        String mid= "mid_"+ RandomNum.getRandInt(1,50);
-        String uid=""+ RandomNum.getRandInt(1,50);
+        String mid= "mid_"+ RandomNum.getRandInt(1,100);
+        String uid=""+ RandomNum.getRandInt(1,100);
         String os=osOptionGroup.getRandomOpt().getValue();
         String appid=this.appId;
         String area=areaOptionGroup.getRandomOpt().getValue();

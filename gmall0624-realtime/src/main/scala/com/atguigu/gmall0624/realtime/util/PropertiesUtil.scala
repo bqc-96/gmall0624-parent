@@ -3,7 +3,7 @@ package com.atguigu.gmall0624.realtime.util
 import java.io.InputStreamReader
 import java.util.Properties
 
-import scala.tools.nsc.interpreter.InputStream
+
 
 object PropertiesUtil {
   def main(args: Array[String]): Unit = {
